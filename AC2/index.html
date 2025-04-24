@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="/submit" method="post">
+        <fieldset>
+            <legend>Informações Pessoais</legend>
+            <label for="nome">Nome:</label>
+            <input type="text" id="nome" name="nome" required aria-label="Digite seu nome completo">
+    
+            <label for="email">E-mail:</label>
+            <input type="email" id="email" name="email" required placeholder="exemplo@dominio.com">
+        </fieldset>
+    
+        <fieldset>
+            <legend>Informações Adicionais</legend>
+            <label for="senha">Senha:</label>
+            <input type="password" id="senha" name="senha" required minlength="6" title="A senha deve ter pelo menos 6 caracteres.">
+        </fieldset>
+
+        <fieldset>
+            <legend>Idade</legend>
+            <label for="idade">Idade:</label>
+            <input type="number" id="idade" name="idade" min="1" max="120" required>
+        </fieldset>
+
+        <fieldset>
+            <legend>Sexo</legend>
+            <label>Gênero:</label>
+            <input type="radio" id="masculino" name="genero" value="masculino">
+            <label for="masculino">Masculino</label>
+            <input type="radio" id="feminino" name="genero" value="feminino">
+            <label for="feminino">Feminino</label>
+        </fieldset>
+    
+        <fieldset>
+            <legend>Preferências</legend>
+            <label for="interesses">Interesses:</label>
+            <input type="checkbox" id="esportes" name="interesses" value="esportes">
+            <label for="esportes">Esportes</label>
+            <input type="checkbox" id="musica" name="interesses" value="musica">
+            <label for="musica">Música</label>
+    
+            <label for="pais">País:</label>
+            <select id="pais" name="pais" required>
+                <option value="">Selecione...</option>
+                <option value="brasil">Brasil</option>
+                <option value="eua">EUA</option>
+                <option value="japao">Japão</option>
+            </select>
+        </fieldset>
+    
+        <fieldset>
+            <legend>Contato</legend>
+            <label for="telefone">Telefone:</label>
+            <input type="tel" id="telefone" name="telefone" pattern="[0-9]{2}-[0-9]{4}-[0-9]{4}" required>
+            <small>Formato: 99-9999-9999</small>
+        </fieldset>
+    
+        <button type="submit" id="submitButton" disabled>Enviar</button>
+        <button type="reset">Limpar</button>
+    </form>
+    
+    <script>
+        const form = document.querySelector('form');
+        const submitButton = document.getElementById('submitButton');
+        form.addEventListener('input', () => {
+            submitButton.disabled = !form.checkValidity();
+        });
+    </script>
+</body>
+</html>
