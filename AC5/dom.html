@@ -12,16 +12,18 @@
     <div class="container">
         <h1 id="titulo">Gerenciador de Tarefas</h1>
             <div class="perfil-inputs">
-                <label for="inputNome">Seu nome:</label>
+                <legend><label for="inputNome">Seu nome:</label></legend>
                 <input type="text" id="inputNome" placeholder="Seu nome">
             </div>
         
             <div class="input-group">
                 <input type="text" id="tarefa" placeholder="Digite uma tarefa">
                 <textarea id="inputDescricao" placeholder="Descrição da tarefa"></textarea>
-                <label for="corFundo" style="align-self:center;">Cor:</label>
-                <input type="color" id="corFundo" value="#f7f7fa">
-                <button id="adicionar">Adicionar</button>
+                <div class="addTask">
+                    <label for="corFundo">Cor:</label>
+                    <input type="color" id="corFundo" value="#f7f7fa">
+                    <button id="adicionar">Adicionar</button>
+                </div>
             </div>
         <ul id="lista"></ul>
     
