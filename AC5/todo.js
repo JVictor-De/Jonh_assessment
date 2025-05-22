@@ -1,89 +1,48 @@
 // Gerenciador de Lista de Tarefas integrado ao DOM
 let tarefas = [];
 
-// Funções de array para uso no DOM
-function listarTarefas() {
-  if (tarefas.length === 0) {
-    alert("Nenhuma tarefa cadastrada.");
-  } else {
-    let lista = tarefas.map((t, i) => `${i + 1}. ${t}`).join("\n");
-    alert("Tarefas:\n" + lista);
-  }
-}
-
-function adicionarTarefaPrompt() {
-  const nova = prompt("Digite a nova tarefa:");
-  if (nova && nova.trim() !== "") {
-    tarefas.push(nova.trim());
-    atualizarLista();
-    alert("Tarefa adicionada!");
-  } else {
-    alert("Tarefa inválida.");
-  }
-}
-
-function removerTarefaPrompt() {
-  if (tarefas.length === 0) {
-    alert("Nenhuma tarefa para remover.");
-    return;
-  }
-  listarTarefas();
-  const idx = parseInt(prompt("Digite o número da tarefa para remover:"), 10);
-  if (!isNaN(idx) && idx >= 1 && idx <= tarefas.length) {
-    const removida = tarefas.splice(idx - 1, 1);
-    atualizarLista();
-    alert(`Tarefa removida: ${removida}`);
-  } else {
-    alert("Número inválido.");
-  }
-}
-
-function menu() {
-  let opcao;
-  do {
-    opcao = prompt(
-      "Gerenciador de Tarefas:\n1. Listar tarefas\n2. Adicionar tarefa\n3. Remover tarefa\n4. Sair\nEscolha uma opção (1-4):"
-    );
-    switch (opcao) {
-      case "1":
-        listarTarefas();
-        break;
-      case "2":
-        adicionarTarefaPrompt();
-        break;
-      case "3":
-        removerTarefaPrompt();
-        break;
-      case "4":
-        alert("Saindo...");
-        break;
-      default:
-        alert("Opção inválida.");
-    }
-  } while (opcao !== "4");
-}
-
-// --- DOM Interativo ---
-// Remove código não utilizado do exemplo anterior
-// Adiciona tarefas, exibe e permite remover
-
 const botaoAdicionar = document.querySelector("#adicionar");
 const lista = document.querySelector("#lista");
+const inputTarefa = document.querySelector("#tarefa");
+const inputDescricao = document.querySelector("#inputDescricao");
+const inputNome = document.querySelector("#inputNome");
+const corFundo = document.querySelector("#corFundo");
 
-botaoAdicionar.addEventListener("click", () => {
-  const input = document.querySelector("#tarefa");
-  const valor = input.value.trim();
-  if (valor === "") return;
-  tarefas.push(valor);
-  atualizarLista();
-  input.value = "";
+// Adiciona tarefa ao clicar no botão ou pressionar Enter
+botaoAdicionar.addEventListener("click", adicionarTarefa);
+inputTarefa.addEventListener("keyup", (e) => {
+  if (e.key === "Enter") adicionarTarefa();
 });
+
+// Exibe o nome do usuário no topo, se preenchido
+inputNome.addEventListener("input", () => {
+  document.title = inputNome.value ? `Tarefas de ${inputNome.value}` : "Gerenciador de Tarefas";
+});
+
+function adicionarTarefa() {
+  const valor = inputTarefa.value.trim();
+  const descricao = inputDescricao.value.trim();
+  if (!valor) return;
+  tarefas.push({ nome: valor, descricao });
+  atualizarLista();
+  inputTarefa.value = "";
+  inputDescricao.value = "";
+  inputTarefa.focus();
+}
 
 function atualizarLista() {
   lista.innerHTML = "";
+  if (tarefas.length === 0) {
+    const vazio = document.createElement("li");
+    vazio.textContent = "Nenhuma tarefa cadastrada.";
+    vazio.style.color = "#888";
+    lista.appendChild(vazio);
+    return;
+  }
   tarefas.forEach((tarefa, idx) => {
     const li = document.createElement("li");
-    li.textContent = tarefa + " ";
+    li.style.background = corFundo.value;
+    li.innerHTML = `<strong>${tarefa.nome}</strong>` + (tarefa.descricao ? `: <em>${tarefa.descricao}</em>` : "");
     const btnRemover = document.createElement("button");
     btnRemover.textContent = "Remover";
     btnRemover.onclick = () => {
@@ -95,22 +54,7 @@ function atualizarLista() {
   });
 }
 
-const inputNome = document.querySelector("#inputNome");
-const inputDescricao = document.querySelector("#inputDescricao");
-const corFundo = document.querySelector("#corFundo");
-const perfil = document.querySelector("#perfil");
+corFundo.addEventListener("input", atualizarLista);
 
-inputNome.addEventListener("keyup", () => {
-  document.querySelector("#nomePerfil").textContent = inputNome.value;
-});
-
-inputDescricao.addEventListener("keyup", () => {
-  document.querySelector("#descricao").textContent = inputDescricao.value;
-});
-
-corFundo.addEventListener("input", () => {
-  perfil.style.backgroundColor = corFundo.value;
-});
-
-// Para rodar o menu de prompt, descomente a linha abaixo:
-// menu();
+// Inicializa a lista ao carregar a página
+atualizarLista();
