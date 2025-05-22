@@ -1,35 +1,40 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Gerenciador de Tarefas</title>
+    <link rel="stylesheet" href="todo.css">
 </head>
 <body>
-    <form id="meuForm">
-        <input type="text" id="nome" placeholder="Seu nome">
+ 
+
+  <div class="container">
+    <h1>Gerenciador de Tarefas</h1>
+  
+    <div class="perfil-inputs">
+        <input type="text" id="inputNome" placeholder="Seu nome">
+    </div>
+
+    <div class="input-group">
+        <input type="text" id="tarefa" placeholder="Digite uma tarefa">
+        <textarea id="inputDescricao" placeholder="Sua descrição"></textarea>
+        <input type="color" id="corFundo">
+        <button id="adicionar">Adicionar</button>
+
+    </div>    
+        
+        <div class="input-group">
+      
+        </div>
+
+        <ul id="lista"></ul>
+
         <button type="submit">Enviar</button>
     </form>
-
-    <button id="mudarCor">Mudar Cor</button>
-   <div id="caixa" style="width: 100px; height: 100px; background: yellow;"></div>
-
-    <input type="text" id="tarefa">
-   <button id="adicionar">Adicionar</button>
-   <ul id="lista"></ul>
-
-   <div id="perfil" style="border: 1px solid #000; padding: 20px;">
-    <h2 id="nomePerfil">Nome</h2>
-    <p id="descricao">Descrição...</p>
   </div>
-  
-  <input type="text" id="inputNome" placeholder="Seu nome">
-  <textarea id="inputDescricao" placeholder="Sua descrição"></textarea>
-  <input type="color" id="corFundo">
 
+  <script src="todo.js"></script>
 
-  
-   
-   <script src="index.js"></script>
 </body>
 </html>
