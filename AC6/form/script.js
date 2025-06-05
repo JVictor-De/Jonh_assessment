@@ -31,6 +31,7 @@ function validateName() {
     setValid(nameInput);
     return true;
 }
+
 // Valida o e-mail
 function validateEmail() {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -41,6 +42,7 @@ function validateEmail() {
     setValid(emailInput);
     return true;
 }
+
 //valida o telefone
 function validatePhone() {
     const phoneRegex = /^\(\d{2}\) \d{5}-\d{4}$/;
@@ -51,6 +53,7 @@ function validatePhone() {
     setValid(phoneInput);
     return true;
 }
+
 //valida o assunto
 function validateSubject() {
     if (!subjectSelect.value) {
@@ -60,6 +63,7 @@ function validateSubject() {
     setValid(subjectSelect);
     return true;
 }
+
 // valida a mensagem
 function validateMessage() {
     const val = messageInput.value.trim();
@@ -81,6 +85,7 @@ function setInvalid(input, msg) {
     input.classList.remove('valid');
     input.title = msg;
 }
+
 function setValid(input) {
     input.classList.remove('invalid');
     input.classList.add('valid');
