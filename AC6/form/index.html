@@ -1,32 +1,49 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Form Validation Example</title>
-    <link rel="stylesheet" href="css/style.css">
+    <title>Formulário com JavaScript</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="container">
-        <h2>Sign Up</h2>
-        <form id="signupForm" onsubmit="return validateForm()">
-            <label for="name">Name:</label>
+    <h1>Formulário de Contato</h1>
+    <form id="contactForm" autocomplete="off">
+        <div class="form-group">
+            <label for="name">Nome:</label>
             <input type="text" id="name" name="name" required>
-
+        </div>
+        <div class="form-group">
             <label for="email">Email:</label>
             <input type="email" id="email" name="email" required>
-
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required>
-
-            <label for="confirmPassword">Confirm Password:</label>
-            <input type="password" id="confirmPassword" name="confirmPassword" required>
-
-            <button type="submit">Submit</button>
-            <p id="error-message"></p>
-        </form>
-    </div>
-
-    <script src="js/validation.js"></script>
+        </div>
+        <div class="form-group">
+            <label for="phone">Telefone:</label>
+            <input type="text" id="phone" name="phone" required placeholder="(99) 99999-9999">
+        </div>
+        <div class="form-group">
+            <label for="subject">Assunto:</label>
+            <select id="subject" name="subject" required>
+                <option value="">Selecione...</option>
+                <option value="elogio">Elogio</option>
+                <option value="reclamacao">Reclamação</option>
+                <option value="sugestao">Sugestão</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="message">Mensagem:</label>
+            <textarea id="message" name="message" required></textarea>
+            <small id="charCount">0/100</small>
+        </div>
+        <div class="form-group">
+            <label for="file">Imagem:</label>
+            <input type="file" id="file" name="file" accept="image/*">
+        </div>
+        <div id="imagePreview"></div>
+        <button type="submit" id="submitBtn" disabled>Enviar</button>
+        <div id="spinner" style="display:none;">Enviando...</div>
+        <div id="result"></div>
+    </form>
+    <script src="script.js"></script>
 </body>
 </html>
