@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Formulário com JavaScript</title>
+        <link rel="stylesheet" href="css/styles.css">
+    </head>
+    <body>
+        <h1>Formulário de Contato</h1>
+        <form id="contactForm" autocomplete="off">
+            <div class="form-group">
+                <label for="name">Nome:</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+        <div class="form-group">
+            <label for="phone">Telefone:</label>
+            <input type="text" id="phone" name="phone" required placeholder="(99) 99999-9999">
+        </div>
+        <div class="form-group">
+            <label for="subject">Periodo:</label>
+            <select id="subject" name="subject" required>
+                <option value="">Selecione...</option>
+                <option value="elogio">Primeiro</option>
+                <option value="reclamacao">Segundo</option>
+                <option value="sugestao">Terceiro</option>
+            </select>
+        </div>
+        
+        <div class="form-group">
+            <label for="file">Coloque uma imagem sua:</label>
+            <input type="file" id="file" name="file" accept="image/*">
+        </div>
+        
+        <div class="form-group">
+            <label for="message">Mensagem:</label>
+            <textarea id="message" name="message" required></textarea>
+            <small id="charCount">0/100</small>
+        </div>
+        
+        <div class="question">
+            <label for="message1">1. Como você pode acessar os valores dos inputs do formulário?:</label>
+            <textarea id="message1" name="message1" required placeholder="Use a propriedade .value de cada elemento, por exemplo: nameInput.value."></textarea>
+            <small id="charCount1">0/100</small>
+        </div>
+        <div class="question">
+            <label for="message2">2. Atualizar o conteúdo de uma página web com o conteúdo do campos(escrever na página sem clicar no botão)?</label>
+            <textarea id="message2" name="message2" required placeholder="Utilize o evento input para capturar mudanças em tempo real e atualizar qualquer parte da página, exemplo: nameInput.addEventListener('input', () => { document.getElementById('algumElemento').textContent = nameInput.value; });"></textarea>
+            <small id="charCount2">0/100</small>
+        </div>
+        <div class="question">
+            <label for="message3">3. Validar cada entrada do formulário antes de enviar o form? [Nome obrigatório, Email no formato, Mensagem obrigatória]</label>
+            <textarea id="message3" name="message3" required placeholder="Crie funções de validação para cada campo (nome obrigatório, email válido, mensagem obrigatória) e chame essas funções antes do envio. Exemplo: function validateName() { return nameInput.value.trim() !== ''; } function validateEmail() { return /\S+@\S+\.\S+/.test(emailInput.value); } function validateMessage() { return messageInput.value.trim() !== ''; }"></textarea>
+            <small id="charCount3">0/100</small>
+        </div>
+        <div class="question">
+            <label for="message4">4. Redefinir as entradas do formulário após enviar o formulário?</label>
+            <textarea id="message4" name="message4" required placeholder="Use form.reset() e limpe feedbacks visuais e pré-visualização de imagem."></textarea>
+            <small id="charCount4">0/100</small>
+        </div>
+        <div class="question">
+            <label for="message5">5. Desativar o botão enviar até que todas as entradas do formulário sejam preenchidas?</label>
+            <textarea id="message5" name="message5" required placeholder="Verifique a validade dos campos em tempo real e só habilite o botão se todos estiverem válidos: submitBtn.disabled = !(validateName() && validateEmail() && validateMessage());"></textarea>
+            <small id="charCount5">0/100</small>
+        </div>
+        <div class="question">
+            <label for="message6">6. Mostrar um botão giratório(spinner) de carregamento enquanto o formulário está sendo enviado?</label>
+            <textarea id="message6" name="message6" required placeholder="Exiba um elemento spinner (display: block) durante o envio e oculte após finalizar."></textarea>
+            <small id="charCount6">0/100</small>
+        </div>
+        <div class="question">
+            <label for="message7">7. Eibir uma mensagem de sucesso após o envio do formulário e depois redirecionar para outra página?</label>
+            <textarea id="message7" name="message7" required placeholder="Mostre a mensagem no DOM e use setTimeout para redirecionar: resultDiv.textContent = 'Mensagem enviada!'; setTimeout(() => { window.location.href = 'outra_pagina.html'; }, 2000);"></textarea>
+            <small id="charCount7">0/100</small>
+        </div>
+        <div class="question">
+            <label for="message8">8. Adicionar Validação de Tamanho da Mensagem <br>Objetivo: Adicionar validação para garantir que a mensagem tenha pelo menos 100 caracteres.</label>
+            <textarea id="message8" name="message8" required placeholder="Garanta que a mensagem tenha pelo menos 100 caracteres: if (messageInput.value.trim().length < 100) { /* mostrar erro */ }"></textarea>
+            <small id="charCount8">0/100</small>
+        </div>
+        <div class="question">
+            <label for="message9">9. Adicionar Feedback Visual para Campos Inválidos <br>Objetivo: Adicionar feedback visual (como bordas vermelhas) aos campos que não passam na validação.</label>
+            <textarea id="message9" name="message9" required placeholder="Adicione/remova classes CSS (invalid/valid) para destacar campos com erro (bordas vermelhas)."></textarea>
+            <small id="charCount9">0/100</small>
+        </div>
+        <div class="question">
+            <label for="message10">10. Adicionar um Campo de Telefone com Máscara. [ (país) (ddd) xxxxx-xxxx ]</label>
+            <textarea id="message10" name="message10" required placeholder="Implemente uma máscara usando o evento input para formatar o valor enquanto digita."></textarea>
+            <small id="charCount10">0/100</small>
+        </div>
+        <div class="question">
+            <label for="message11">11. Adicionar um Campo de Seleção de Assunto. [Elogio, Reclamação e Sugestão] <br>Objetivo: Adicionar um campo de seleção para o usuário escolher o assunto da mensagem. Exiba uma mensagem de erro se nenhum assunto for selecionado.</label>
+            <textarea id="message11" name="message11" required placeholder="Use um <select> e valide se algum valor foi selecionado diferente de vazio."></textarea>
+            <small id="charCount11">0/100</small>
+        </div>
+        <div class="question">
+            <label for="message12">12. Adicionar um Campo de Arquivo ao Formulário para permitir o upload de imagens.<br>Modifique o JavaScript para Exibir a Pré-visualização do Arquivo Selecionado<br>FileReader: Usa FileReader para ler o arquivo de imagem e exibir a pré-visualização.<br>Limpar Pré-visualização: Limpa a pré-visualização da imagem quando o formulário é enviado e redefinido.</label>
+            <textarea id="message12" name="message12" required placeholder="Inclua <input type='file'> e use FileReader para mostrar a pré-visualização da imagem selecionada. Limpe a pré-visualização ao enviar ou redefinir o formulário."></textarea>
+            <small id="charCount12">0/100</small>
+        </div>
+        
+        <div id="imagePreview"></div>
+        <button type="submit" id="submitBtn" disabled>Enviar</button>
+        <div id="spinner" style="display:none;">Enviando...</div>
+        <div id="result">
+        </div>
+    </form>
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,125 @@
+body {
+    /* Estilo geral do fundo e fonte da página */
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #00c3ff 0%, #3a7bd5 30%, #00ecbc 60%, #222 85%, #000 100%);
+    margin: 0;
+    padding: 0;
+    display: block;
+    min-height: 100vh;
+}
+
+
+/* Título centralizado e destacado */
+h1 {
+    text-align: center;
+    color: #ffffff;
+    margin-top: 40px;
+    margin-bottom: 10px;
+}
+
+
+/* Formulário centralizado com sombra e borda arredondada */
+form {
+    margin: 0 auto;
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+}
+
+
+/* Espaçamento entre os grupos de campos */
+.form-group .question {
+    margin-bottom: 15px;
+}
+
+
+/* Estilo dos rótulos dos campos */
+label {
+    display: block;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+
+/* Estilo dos campos de entrada, textarea e arquivo */
+input[type="text"],
+input[type="email"],
+textarea,
+input[type="file"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+
+/* Permite redimensionar verticalmente o textarea */
+textarea {
+    resize: vertical;
+}
+
+
+/* Botão de envio estilizado */
+button[type="submit"] {
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+}
+
+
+/* Botão de envio desabilitado */
+button[type="submit"]:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+
+/* Efeito hover no botão de envio */
+button[type="submit"]:hover:not(:disabled) {
+    background-color: #218838;
+}
+
+
+/* Mensagem de resultado centralizada */
+#result {
+    margin-top: 20px;
+    text-align: center;
+}
+
+
+/* Campos inválidos destacados em vermelho */
+input.invalid, textarea.invalid, select.invalid {
+    border: 2px solid #e74c3c;
+    background: #fff0f0;
+}
+
+
+/* Campos válidos destacados em verde */
+input.valid, textarea.valid, select.valid {
+    border: 2px solid #28a745;
+}
+
+
+/* Spinner de carregamento */
+#spinner {
+    margin-top: 20px;
+    text-align: center;
+    font-weight: bold;
+}
+
+
+/* Imagem de pré-visualização estilizada */
+#imagePreview img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 4px;
+    margin-top: 10px;
+}
