@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulador de Investimentos</title>
+    <link rel="stylesheet" href="css/investimentos.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <!-- Header com navegação -->
+    <header>
+        <nav class="navbar">
+            <div class="logo-area">
+                <img src="assents/LOGO_BCBGHAPH.png" alt="Logo" class="logo">
+            </div>
+            <ul class="nav-menu">
+                <li><a href="graph.html" class="nav-link">Indicadores Econômicos</a></li>
+                <li><a href="investimentos.html" class="nav-link active">Simulador</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Slides: Questionário e Conclusão -->
+        <section class="slide-card" id="slide-section">
+            <div id="slides">
+                <!-- Slide 1: Formulário de entrada -->
+                <div class="slide active" id="slide-form">
+                    <div class="slide-content">
+                        <h2>Simulador de Investimentos</h2>
+                        <form id="invest-form" autocomplete="off">
+                            <div class="form-group">
+                                <label for="valor-inicial">Valor Inicial</label>
+                                <div class="input-wrapper">
+                                    <span class="currency">R$</span>
+                                    <input type="number" id="valor-inicial" name="valor-inicial" min="100" required placeholder="1.000">
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="anos">Período de Investimento</label>
+                                <div class="input-wrapper">
+                                    <input type="number" id="anos" name="anos" min="1" max="30" value="5" required>
+                                    <span class="unit">anos</span>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>Investimentos para Comparar</label>
+                                <div class="investment-tabs">
+                                    <div class="investment-tab active" data-investment="ipca">
+                                        <input type="checkbox" id="ipca" value="ipca" checked style="display: none;">
+                                        IPCA
+                                    </div>
+                                    <div class="investment-tab active" data-investment="selic">
+                                        <input type="checkbox" id="selic" value="selic" checked style="display: none;">
+                                        SELIC
+                                    </div>
+                                    <div class="investment-tab active" data-investment="cdb">
+                                        <input type="checkbox" id="cdb" value="cdb" checked style="display: none;">
+                                        CDB
+                                    </div>
+                                    <div class="investment-tab active" data-investment="dolar">
+                                        <input type="checkbox" id="dolar" value="dolar" checked style="display: none;">
+                                        Dólar
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <button type="submit" class="simulate-btn">
+                                <span>Simular Investimento</span>
+                            </button>
+                        </form>
+
+                        <div class="suggestions">
+                            <div class="suggestion" data-explica="ipca"><b>IPCA:</b> Representa a inflação média (4,5% a.a.)<div class="explica-extra" style="display:none;"></div></div>
+                            <div class="suggestion" data-explica="selic"><b>SELIC:</b> Taxa básica de juros (10,75% a.a.)<div class="explica-extra" style="display:none;"></div></div>
+                            <div class="suggestion" data-explica="cdb"><b>CDB:</b> Rende próximo ao CDI (12,5% a.a.)<div class="explica-extra" style="display:none;"></div></div>
+                            <div class="suggestion" data-explica="dolar"><b>Dólar:</b> Variação cambial histórica (3% a.a.)<div class="explica-extra" style="display:none;"></div></div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Slide 2: Resultados -->
+                <div class="slide" id="slide-result">
+                    <div class="slide-content">
+                        <h2>Evolução dos Investimentos</h2>
+                        <div class="chart-container">
+                            <canvas id="invest-chart"></canvas>
+                        </div>
+                        <table class="summary-table">
+                            <thead>
+                                <tr>
+                                    <th>Investimento</th>
+                                    <th>Valor Final (R$)</th>
+                                    <th>Rentabilidade Total (%)</th>
+                                </tr>
+                            </thead>
+                            <tbody id="result-table-body">
+                                <!-- Preenchido via JS -->
+                            </tbody>
+                        </table>
+                        <button id="back-slide" class="back-btn">Nova Simulação</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Nova seção de explicação dos investimentos -->
+   
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-contact">
+                <span>Contato: contato@bcbgrafic.com.br</span>
+            </div>
+            <div class="footer-social">
+                <a href="#" aria-label="Instagram">Instagram</a> |
+                <a href="#" aria-label="LinkedIn">LinkedIn</a> |
+                <a href="#" aria-label="GitHub">GitHub</a>
+            </div>
+            <div class="footer-copy">
+                &copy; 2024 BCBGrafic. Todos os direitos reservados.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+    // Simulador de investimentos
+    const formSlide = document.getElementById('slide-form');
+    const resultSlide = document.getElementById('slide-result');
+    const investForm = document.getElementById('invest-form');
+    const backSlideBtn = document.getElementById('back-slide');
+    const resultTableBody = document.getElementById('result-table-body');
+    let investChart;
+
+    // Taxas anuais médias (mock)
+    const taxas = {
+        ipca: 4.5,    // inflação
+        selic: 10.75, // selic
+        cdb: 12.5,    // cdb
+        dolar: 3.0    // variação do dólar
+    };
+
+    const cores = {
+        ipca: '#6fff57',
+        selic: '#3987ff', 
+        cdb: '#ff7a39',
+        dolar: '#39e5ff'
+    };
+
+    const nomes = {
+        ipca: 'IPCA',
+        selic: 'SELIC',
+        cdb: 'CDB',
+        dolar: 'Dólar'
+    };
+
+    function showSlide(slide) {
+        formSlide.classList.remove('active');
+        resultSlide.classList.remove('active');
+        slide.classList.add('active');
+    }
+
+    // Controle dos tabs de investimento
+    document.querySelectorAll('.investment-tab').forEach(tab => {
+        tab.addEventListener('click', () => {
+            const investment = tab.dataset.investment;
+            const checkbox = document.getElementById(investment);
+            
+            // Toggle do checkbox
+            checkbox.checked = !checkbox.checked;
+            
+            // Toggle da classe active
+            if (checkbox.checked) {
+                tab.classList.add('active');
+            } else {
+                tab.classList.remove('active');
+            }
+        });
+    });
+
+    function getSelectedInvestments() {
+        const checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
+        return Array.from(checkboxes).map(cb => cb.value);
+    }
+
+    function simularInvestimento(valorInicial, anos, tipos) {
+        const resultados = {};
+        tipos.forEach(tipo => {
+            const valores = [valorInicial];
+            const taxa = taxas[tipo] / 100;
+            for (let i = 1; i <= anos; i++) {
+                valores.push(valores[i-1] * (1 + taxa));
+            }
+            resultados[tipo] = valores;
+        });
+        return resultados;
+    }
+
+    function criarGrafico(resultados, anos) {
+        const ctx = document.getElementById('invest-chart').getContext('2d');
+        if (investChart) investChart.destroy();
+        
+        const labels = [];
+        for (let i = 0; i <= anos; i++) {
+            labels.push(i === 0 ? 'Início' : `${i}º ano`);
+        }
+        
+        const datasets = Object.keys(resultados).map(tipo => ({
+            label: nomes[tipo],
+            data: resultados[tipo],
+            borderColor: cores[tipo],
+            backgroundColor: cores[tipo] + '20',
+            fill: false,
+            tension: 0.3
+        }));
+
+        investChart = new Chart(ctx, {
+            type: 'line',
+            data: { labels, datasets },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { labels: { color: '#fff' } }
+                },
+                scales: {
+                    x: { ticks: { color: '#aaa' } },
+                    y: { ticks: { color: '#aaa' }, beginAtZero: false }
+                }
+            }
+        });
+    }
+
+    function preencherTabela(resultados, anos, valorInicial) {
+        resultTableBody.innerHTML = '';
+        Object.keys(resultados).forEach(tipo => {
+            const valorFinal = resultados[tipo][anos];
+            const rentabilidade = ((valorFinal - valorInicial) / valorInicial * 100).toFixed(2);
+            
+            resultTableBody.innerHTML += `<tr>
+                <td>${nomes[tipo]}</td>
+                <td>R$ ${valorFinal.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</td>
+                <td>${rentabilidade}%</td>
+            </tr>`;
+        });
+    }
+
+    investForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const valorInicial = parseFloat(document.getElementById('valor-inicial').value);
+        const anos = parseInt(document.getElementById('anos').value);
+        const tiposSelecionados = getSelectedInvestments();
+        
+        if (!valorInicial || !anos || tiposSelecionados.length === 0) {
+            alert('Preencha todos os campos e selecione pelo menos um investimento.');
+            return;
+        }
+
+        const resultados = simularInvestimento(valorInicial, anos, tiposSelecionados);
+        
+        criarGrafico(resultados, anos);
+        preencherTabela(resultados, anos, valorInicial);
+        
+        showSlide(resultSlide);
+    });
+
+    backSlideBtn.addEventListener('click', function() {
+        showSlide(formSlide);
+    });
+
+    // Explicações para cada sugestão
+    const explicacoes = {
+        ipca: `<br>IPCA (Índice Nacional de Preços ao Consumidor Amplo):<br>
+        É o índice oficial da inflação no Brasil, calculado pelo IBGE. Mede a variação dos preços de uma cesta de produtos e serviços consumidos pelas famílias. Investimentos atrelados ao IPCA protegem o poder de compra do dinheiro ao longo do tempo.`,
+        selic: `<br>SELIC (Sistema Especial de Liquidação e de Custódia):</strong><br>
+        É a taxa básica de juros da economia brasileira, definida pelo Banco Central. Serve de referência para diversos investimentos de renda fixa e influencia todas as taxas de juros do país.`,
+        cdb: `<br>CDB (Certificado de Depósito Bancário):</strong><br><br>
+        É um título de renda fixa emitido por bancos para captar recursos. Ao investir em um CDB, você está emprestando dinheiro ao banco e recebe uma remuneração (juros) por isso, que pode ser prefixada, pós-fixada (geralmente atrelada ao CDI) ou híbrida.`,
+        dolar: `<br>Dólar:</strong><br><br>
+        Investir em dólar significa aplicar em ativos atrelados à moeda americana, buscando proteção contra a desvalorização do real e exposição ao mercado internacional.`
+    };
+
+    document.querySelectorAll('.suggestion').forEach(suggestion => {
+        suggestion.addEventListener('click', function() {
+            // Esconde todas as explicações extras antes de mostrar a correta
+            document.querySelectorAll('.explica-extra').forEach(div => div.style.display = 'none');
+            // Mostra apenas a explicação da sugestão clicada
+            const key = this.getAttribute('data-explica');
+            const extraDiv = this.querySelector('.explica-extra');
+            if (key && explicacoes[key]) {
+                extraDiv.innerHTML = explicacoes[key];
+                extraDiv.style.display = 'block';
+            }
+        });
+    });
+    </script>
+</body>
+</html>

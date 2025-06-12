@@ -1,3 +1,5 @@
+// Lógica principal da página de indicadores econômicos: inicializa gráficos, abas e busca dados do BCB
+
 document.addEventListener('DOMContentLoaded', function() {
     // Configurações globais do Chart.js
     Chart.defaults.color = '#aaaaaa';

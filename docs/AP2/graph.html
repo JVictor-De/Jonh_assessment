@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Indicadores Econômicos</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <nav class="navbar">
+                <div class="logo-area">
+                    <img src="assents/LOGO_BCBGHAPH.png" alt="LOGO BCBGHAPH" class="logo">
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="graph.html" class="nav-link active">Indicadores Econômicos</a></li>
+                    <li><a href="investimentos.html" class="nav-link">Investimentos</a></li>
+                </ul>
+            </nav>
+            <div class="progress-bar">
+                <div class="status">Atualizado: <span id="last-update">Carregando...</span></div>
+                <div class="bar">
+                    <div class="bar-fill"></div>
+                </div>
+                <div class="percentage">Data atual</div>
+            </div>
+        </header>
+
+        <main>
+            <section class="card" id="cambio-card">
+                <h2>Taxa de Câmbio USD/BRL</h2>
+                <div class="chart-container">
+                    <canvas id="cambio-chart"></canvas>
+                </div>
+                <div class="indicator">
+                    <div class="current-value">R$ <span id="current-cambio">--</span></div>
+                    <div class="change" id="cambio-change">--</div>
+                </div>
+            </section>
+
+            <section class="card" id="ipca-card">
+                <h2>IPCA - Últimos 6 meses</h2>
+                <div class="chart-container">
+                    <canvas id="ipca-chart"></canvas>
+                </div>
+                <div class="legend">
+                    <div class="legend-item">
+                        <span class="dot within"></span> Abaixo da meta
+                    </div>
+                    <div class="legend-item">
+                        <span class="dot risk"></span> Acima da meta
+                    </div>
+                </div>
+                <div class="indicator">
+                    <div class="current-value"><span id="current-ipca">--</span>%</div>
+                    <div class="meta">Meta: 3,5% ± 1,5%</div>
+                </div>
+            </section>
+
+            <section class="card" id="selic-card">
+                <h2>Taxa Selic - Histórico</h2>
+                <div class="chart-container">
+                    <canvas id="selic-chart"></canvas>
+                </div>
+                <div class="indicator">
+                    <div class="current-value"><span id="current-selic">--</span>%</div>
+                    <div class="period">Taxa anual</div>
+                </div>
+            </section>
+
+            <section class="card" id="resumo-card">
+                <h2>Resumo da Economia</h2>
+                <div class="chart-container">
+                    <canvas id="expenses-chart"></canvas>
+                </div>
+                <div class="summary">
+                    <div class="summary-value">
+                        Inflação: <span id="summary-ipca">--</span>%
+                    </div>
+                    <div class="summary-table-container">
+                        <table class="summary-table">
+                            <thead>
+                                <tr>
+                                    <th>Indicador</th>
+                                    <th>Valor Atual</th>
+                                    <th>Unidade</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Câmbio (USD/BRL)</td>
+                                    <td id="table-cambio">--</td>
+                                    <td>R$</td>
+                                </tr>
+                                <tr>
+                                    <td>IPCA</td>
+                                    <td id="table-ipca">--</td>
+                                    <td>%</td>
+                                </tr>
+                                <tr>
+                                    <td>Selic</td>
+                                    <td id="table-selic">--</td>
+                                    <td>%</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="legend">
+                        <div class="legend-item">
+                            <span class="dot cambio"></span> Câmbio
+                        </div>
+                        <div class="legend-item">
+                            <span class="dot ipca"></span> Inflação
+                        </div>
+                        <div class="legend-item">
+                            <span class="dot selic"></span> Taxa Selic
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <div class="nav-tabs">
+                <div class="tab active" data-tab="cambio">Câmbio</div>
+                <div class="tab" data-tab="ipca">IPCA</div>
+                <div class="tab" data-tab="selic">Selic</div>
+                <div class="tab" data-tab="resumo">Resumo</div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="js/bcb-api.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Análise de Perfil de Investidor</title>
+    <link rel="stylesheet" href="css/form.css">
+</head>
+<body>
+
+    <div class="container">
+        <h1>Análise de Perfil de Investidor</h1>
+        <p id="description">Responda às perguntas abaixo para descobrir o seu perfil de investidor. Selecione a opção que melhor representa você.</p>
+
+        <form id="quizForm">
+            <div class="question-block">
+                <p class="question-text">1. Qual é o seu principal objetivo ao investir?</p>
+                <div class="option">
+                    <input type="radio" id="q1a1" name="q1" value="1" required><label for="q1a1">Preservar meu patrimônio, evitando perdas.</label>
+                </div>
+                <div class="option">
+                    <input type="radio" id="q1a2" name="q1" value="3"><label for="q1a2">Aumentar meu capital com um equilíbrio entre segurança e rentabilidade.</label>
+                </div>
+                <div class="option">
+                    <input type="radio" id="q1a3" name="q1" value="5"><label for="q1a3">Maximizar a rentabilidade, mesmo que isso envolva maiores riscos.</label>
+                </div>
+            </div>
+
+            <div class="question-block">
+                <p class="question-text">2. Por quanto tempo você pretende manter seus investimentos?</p>
+                <div class="option">
+                    <input type="radio" id="q2a1" name="q2" value="1" required><label for="q2a1">Curto prazo (até 2 anos).</label>
+                </div>
+                <div class="option">
+                    <input type="radio" id="q2a2" name="q2" value="3"><label for="q2a2">Médio prazo (de 2 a 5 anos).</label>
+                </div>
+                <div class="option">
+                    <input type="radio" id="q2a3" name="q2" value="5"><label for="q2a3">Longo prazo (mais de 5 anos).</label>
+                </div>
+            </div>
+
+            <div class="question-block">
+                <p class="question-text">3. Como você reagiria se sua carteira de investimentos caísse 20% em um mês?</p>
+                <div class="option">
+                    <input type="radio" id="q3a1" name="q3" value="1" required><label for="q3a1">Resgataria todo o dinheiro para evitar mais perdas.</label>
+                </div>
+                <div class="option">
+                    <input type="radio" id="q3a2" name="q3" value="3"><label for="q3a2">Manteria a posição, pois entendo que oscilações acontecem.</label>
+                </div>
+                <div class="option">
+                    <input type="radio" id="q3a3" name="q3" value="5"><label for="q3a3">Investiria mais, aproveitando a oportunidade de "comprar na baixa".</label>
+                </div>
+            </div>
+
+            <div class="question-block">
+                <p class="question-text">4. Qual seu nível de conhecimento sobre o mercado financeiro?</p>
+                <div class="option">
+                    <input type="radio" id="q4a1" name="q4" value="1" required><label for="q4a1">Iniciante, conheço apenas o básico como a poupança.</label>
+                </div>
+                <div class="option">
+                    <input type="radio" id="q4a2" name="q4" value="3"><label for="q4a2">Intermediário, já ouvi falar de Tesouro Direto, CDBs e alguns fundos.</label>
+                </div>
+                <div class="option">
+                    <input type="radio" id="q4a3" name="q4" value="5"><label for="q4a3">Avançado, entendo sobre ações, derivativos e outros ativos complexos.</label>
+                </div>
+            </div>
+            
+            <div class="question-block">
+                <p class="question-text">5. Qual percentual da sua renda você está disposto a investir regularmente?</p>
+                <div class="option">
+                    <input type="radio" id="q5a1" name="q5" value="1" required><label for="q5a1">Até 10%.</label>
+                </div>
+                <div class="option">
+                    <input type="radio" id="q5a2" name="q5" value="3"><label for="q5a2">Entre 10% e 25%.</label>
+                </div>
+                <div class="option">
+                    <input type="radio" id="q5a3" name="q5" value="5"><label for="q5a3">Acima de 25%.</label>
+                </div>
+            </div>
+
+            <div class="question-block">
+                <p class="question-text">6. Qual a sua principal fonte de renda?</p>
+                <div class="option">
+                    <input type="radio" id="q6a1" name="q6" value="1" required><label for="q6a1">Renda variável (autônomo, comissões) ou sou dependente financeiro.</label>
+                </div>
+                <div class="option">
+                    <input type="radio" id="q6a2" name="q6" value="3"><label for="q6a2">Renda estável (CLT, funcionário público).</label>
+                </div>
+                <div class="option">
+                    <input type="radio" id="q6a3" name="q6" value="5"><label for="q6a3">Múltiplas fontes de renda ou renda passiva de outros investimentos.</label>
+                </div>
+            </div>
+
+            <div class="question-block">
+                <p class="question-text">7. Você possui uma reserva de emergência (equivalente a 6 meses de seus custos) já formada?</p>
+                <div class="option">
+                    <input type="radio" id="q7a1" name="q7" value="1" required><label for="q7a1">Não, estou começando a formá-la agora.</label>
+                </div>
+                <div class="option">
+                    <input type="radio" id="q7a2" name="q7" value="3"><label for="q7a2">Estou na metade do caminho para completá-la.</label>
+                </div>
+                <div class="option">
+                    <input type="radio" id="q7a3" name="q7" value="5"><label for="q7a3">Sim, já tenho uma reserva de emergência consolidada.</label>
+                </div>
+            </div>
+
+            <div class="question-block">
+                <p class="question-text">8. Em relação à liquidez (facilidade de resgatar o dinheiro), você prefere:</p>
+                <div class="option">
+                    <input type="radio" id="q8a1" name="q8" value="1" required><label for="q8a1">Ter a possibilidade de resgatar a qualquer momento, mesmo com menor rentabilidade.</label>
+                </div>
+                <div class="option">
+                    <input type="radio" id="q8a2" name="q8" value="3"><label for="q8a2">Manter um equilíbrio, com parte do dinheiro acessível e parte em investimentos de longo prazo.</label>
+                </div>
+                <div class="option">
+                    <input type="radio" id="q8a3" name="q8" value="5"><label for="q8a3">Não me importo em "prender" o dinheiro por mais tempo em troca de maior potencial de ganho.</label>
+                </div>
+            </div>
+            
+            <div class="question-block">
+                <p class="question-text">9. Qual frase melhor descreve sua relação com finanças?</p>
+                <div class="option">
+                    <input type="radio" id="q9a1" name="q9" value="1" required><label for="q9a1">"Segurança em primeiro lugar."</label>
+                </div>
+                <div class="option">
+                    <input type="radio" id="q9a2" name="q9" value="3"><label for="q9a2">"Quem não arrisca, não petisca, mas com cautela."</label>
+                </div>
+                <div class="option">
+                    <input type="radio" id="q9a3" name="q9" value="5"><label for="q9a3">"Maiores riscos, maiores retornos."</label>
+                </div>
+            </div>
+
+            <div class="question-block">
+                <p class="question-text">10. Se você recebesse um prêmio inesperado em dinheiro, o que faria?</p>
+                <div class="option">
+                    <input type="radio" id="q10a1" name="q10" value="1" required><label for="q10a1">Colocaria na poupança ou em um CDB de liquidez diária.</label>
+                </div>
+                <div class="option">
+                    <input type="radio" id="q10a2" name="q10" value="3"><label for="q10a2">Diversificaria entre renda fixa e um pouco de renda variável.</label>
+                </div>
+                <div class="option">
+                    <input type="radio" id="q10a3" name="q10" value="5"><label for="q10a3">Procuraria oportunidades na bolsa de valores para potencializar o ganho.</label>
+                </div>
+            </div>
+
+            <div class="question-block">
+                <p class="question-text">11. Você já investiu em ações ou fundos de ações alguma vez?</p>
+                <div class="option">
+                    <input type="radio" id="q11a1" name="q11" value="1" required><label for="q11a1">Nunca investi e não me sinto confortável com a ideia.</label>
+                </div>
+                <div class="option">
+                    <input type="radio" id="q11a2" name="q11" value="3"><label for="q11a2">Nunca investi, mas tenho interesse em aprender e começar.</label>
+                </div>
+                <div class="option">
+                    <input type="radio" id="q11a3" name="q11" value="5"><label for="q11a3">Sim, já tenho ou tive investimentos em renda variável.</label>
+                </div>
+            </div>
+
+            <div class="question-block">
+                <p class="question-text">12. Para você, é mais importante:</p>
+                <div class="option">
+                    <input type="radio" id="q12a1" name="q12" value="1" required><label for="q12a1">Saber exatamente quanto seu dinheiro vai render (previsibilidade).</label>
+                </div>
+                <div class="option">
+                    <input type="radio" id="q12a2" name="q12" value="3"><label for="q12a2">Aceitar alguma flutuação para ter a chance de um rendimento um pouco maior.</label>
+                </div>
+                <div class="option">
+                    <input type="radio" id="q12a3" name="q12" value="5"><label for="q12a3">Ter a chance de rendimentos altos, mesmo que o valor possa cair no curto prazo.</label>
+                </div>
+            </div>
+
+            <button type="submit" class="submit-btn">Ver Meu Perfil</button>
+        </form>
+
+        <div id="result">
+            <h2 id="result-title"></h2>
+            <p id="result-description"></p>
+        </div>
+
+    </div>
+
+
+    <script src="js/form.js"></script>
+    
+</body>
+</html>
