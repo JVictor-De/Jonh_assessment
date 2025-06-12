@@ -11,8 +11,9 @@
     <div class="container">
         <header>
             <nav>
+                <img src="/LOGO_BCBGHAPH.png" alt="logo BCBGrafic com seta apontando para cima" class="logo">
                 <div class="back-button">
-                    <span>&lt;</span> Indicadores Econômicos
+                    <span>Indicadores Econômicos</span> 
                 </div>
             </nav>
             <div class="progress-bar">
@@ -66,7 +67,7 @@
                 </div>
             </section>
 
-            <section class="card" id="expenses-card">
+            <section class="card" id="resumo-card">
                 <h2>Resumo da Economia</h2>
                 <div class="chart-container">
                     <canvas id="expenses-chart"></canvas>
@@ -74,6 +75,34 @@
                 <div class="summary">
                     <div class="summary-value">
                         Inflação: <span id="summary-ipca">--</span>%
+                    </div>
+                    <div class="summary-table-container">
+                        <table class="summary-table">
+                            <thead>
+                                <tr>
+                                    <th>Indicador</th>
+                                    <th>Valor Atual</th>
+                                    <th>Unidade</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Câmbio (USD/BRL)</td>
+                                    <td id="table-cambio">--</td>
+                                    <td>R$</td>
+                                </tr>
+                                <tr>
+                                    <td>IPCA</td>
+                                    <td id="table-ipca">--</td>
+                                    <td>%</td>
+                                </tr>
+                                <tr>
+                                    <td>Selic</td>
+                                    <td id="table-selic">--</td>
+                                    <td>%</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                     <div class="legend">
                         <div class="legend-item">

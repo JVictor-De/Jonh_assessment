@@ -212,17 +212,24 @@ document.addEventListener('DOMContentLoaded', function() {
     // Inicializar o gráfico de resumo (donut)
     function initExpensesChart() {
         const ctx = document.getElementById('expenses-chart').getContext('2d');
-        
+        // Destroi gráfico anterior se existir
+        if (expensesChart) {
+            expensesChart.destroy();
+        }
+        // Garante que os valores são válidos
+        const cambio = parseFloat(currentCambioEl.textContent.replace(',', '.'));
+        const ipca = parseFloat(currentIPCAEl.textContent.replace(',', '.'));
+        const selic = parseFloat(currentSelicEl.textContent.replace(',', '.'));
+        if (isNaN(cambio) || isNaN(ipca) || isNaN(selic)) {
+            // Não cria o gráfico se algum valor não estiver pronto
+            return;
+        }
         expensesChart = new Chart(ctx, {
             type: 'doughnut',
             data: {
                 labels: ['Câmbio', 'IPCA', 'Selic'],
                 datasets: [{
-                    data: [
-                        parseFloat(currentCambioEl.textContent),
-                        parseFloat(currentIPCAEl.textContent),
-                        parseFloat(currentSelicEl.textContent)
-                    ],
+                    data: [cambio, ipca, selic],
                     backgroundColor: [
                         '#ff7a39',  // laranja
                         '#6fff57',  // verde
@@ -244,6 +251,16 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
+    // Atualizar tabela de resumo
+    function updateResumoTable() {
+        const tableCambio = document.getElementById('table-cambio');
+        const tableIpca = document.getElementById('table-ipca');
+        const tableSelic = document.getElementById('table-selic');
+        if (tableCambio) tableCambio.textContent = currentCambioEl.textContent;
+        if (tableIpca) tableIpca.textContent = currentIPCAEl.textContent;
+        if (tableSelic) tableSelic.textContent = currentSelicEl.textContent;
+    }
+
     // Buscar e processar dados
     async function fetchData() {
         try {
@@ -263,13 +280,13 @@ document.addEventListener('DOMContentLoaded', function() {
             initCambioChart(cambioData);
             initIPCAChart(ipcaData);
             initSelicChart(selicData);
-            
-            // Após inicializar todos os indicadores, criar o gráfico de resumo
-            initExpensesChart();
-            
+            // Após garantir que os valores DOM estão atualizados, aguarde o próximo tick do event loop
+            setTimeout(() => {
+                initExpensesChart();
+                updateResumoTable();
+            }, 0);
             // Atualizar data
             updateLastUpdate();
-            
         } catch (error) {
             console.error('Erro ao buscar dados:', error);
             alert('Houve um erro ao buscar os dados econômicos. Por favor, tente novamente mais tarde.');
